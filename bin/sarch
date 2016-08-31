@@ -15,8 +15,9 @@ To create a token, set up a bot in slack.
 
 __author__      = "Joel Dubowy"
 
-from pyairfire import scripting
-from pyairfire.chat.slack import SlackArchiver
+import afscripting as scripting
+
+from afchat.slack import SlackArchiver
 
 REQUIRED_ARGS = [
     {

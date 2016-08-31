@@ -1,4 +1,4 @@
-"""pyairfire.chat.slack:  Utilities for archiving slack chat histories and
+"""afchat.slack:  Utilities for archiving slack chat histories and
 posting messages.
 """
 
@@ -10,8 +10,8 @@ import logging
 import requests
 
 import slacker
+from afscripting.utils import exit_with_msg
 
-from pyairfire.scripting.utils import exit_with_msg
 from . import archivebase
 
 __all__ = [

@@ -1,4 +1,4 @@
-"""pyairfire.chat.archivebase
+"""afchat.archivebase
 """
 
 __author__ = "Joel Dubowy"
@@ -15,7 +15,7 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from pyairfire.scripting.utils import exit_with_msg
+from afscripting.utils import exit_with_msg
 
 class ArchiverBase(object):
 

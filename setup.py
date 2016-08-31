@@ -25,6 +25,9 @@ setup(
     url='https://github.com/pnwairfire/afchat',
     description='Utilities for interacting with chat services',
     install_requires=[
-        "slacker==0.9.24",
+        "afscripting==1.0.0",
+    ],
+    dependency_links=[
+        "https://pypi.smoke.airfire.org/simple/afscripting/",
     ]
 )

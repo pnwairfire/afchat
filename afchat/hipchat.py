@@ -1,4 +1,4 @@
-"""pyairfire.chat.hipchat
+"""afchat.hipchat
 """
 
 __author__      = "Joel Dubowy"
@@ -8,7 +8,8 @@ import logging
 import requests
 import traceback
 
-from pyairfire.scripting.utils import exit_with_msg
+from afscripting.utils import exit_with_msg
+
 from . import archivebase
 
 __all__ = [

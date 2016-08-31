@@ -9,8 +9,9 @@ TODO: rename this script?
 
 __author__      = "Joel Dubowy"
 
-from pyairfire import scripting
-from pyairfire.chat.hipchat import HipChatArchiver
+import afscripting as scripting
+
+from afchat.hipchat import HipChatArchiver
 
 REQUIRED_ARGS = [
     {
