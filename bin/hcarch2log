@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+
+"""hcarch2log: ...
+"""
+
+__author__      = "Joel Dubowy"
+
+import json
+import os
+import sys
+from argparse import ArgumentParser, RawTextHelpFormatter
+
+def main():
+    parser = ArgumentParser()
+    parser.add_argument('room_dir')
+    args  = parser.parse_args()
+
+    d = os.path.expanduser(args.room_dir)
+    for filename in sorted(os.listdir(d)):
+        filepathname = os.path.join(d, filename)
+        if os.path.isfile(filepathname):
+            with open(filepathname, 'r') as f:
+                try:
+                    j = json.loads(f.read())
+                except Exception as e:
+                    msg = " -- SKIPPED DAY: {} -- ERROR: {}".format(
+                        filename, e)
+                    sys.stdout.write(msg)
+                    sys.stderr.write(msg)
+                    continue
+
+                for log in j:
+                    try:
+                        line = "{} - {}:  {}\n".format(log['date'],
+                            log['from']['name'].encode('utf-8', 'ignore'),
+                            log['message'].encode('utf-8', 'ignore'))
+                        sys.stdout.write(line)
+                    except Exception as e:
+                        msg = " -- SKIPPED MESSAGE -- ERROR: {}".format(e)
+                        sys.stdout.write(msg)
+                        sys.stderr.write(msg)
+
+        else:
+            sys.stderr.write('Skipping {}'.format(filename))
+
+if __name__ == "__main__":
+    main()

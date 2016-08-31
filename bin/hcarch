@@ -1,0 +1,103 @@
+#!/usr/bin/env python
+
+"""hcarch: archives hipchat room histories
+
+Queries all rooms, and then queries the history for each of them.
+
+TODO: rename this script?
+"""
+
+__author__      = "Joel Dubowy"
+
+from pyairfire import scripting
+from pyairfire.chat.hipchat import HipChatArchiver
+
+REQUIRED_ARGS = [
+    {
+        'short': '-n',
+        'long': '--num-days',
+        'type': int,
+        'dest': 'num_days',
+        'help': 'number of days in the past (from now)',
+        'action': 'store'
+    },
+    {
+        'short': '-a',
+        'long': '--auth-token',
+        'dest': 'auth_token',
+        'help': 'API Auth token',
+        'action': 'store'
+    }
+]
+
+OPTIONAL_ARGS = [
+    {
+        'short': '-r',
+        'long': '--room-id',
+        'dest': 'room_id',
+        'help': 'Limit archive to specific room with given id',
+        'action': 'store'
+    },
+    #
+    {
+        'short': '-d',
+        'long': '--dest-dir',
+        'dest': 'dest_dir',
+        'help': 'directory to store archive',
+        'action': 'store'
+    },
+    # Email options
+    {
+        'short': '-e',
+        'long': '--email-recipient',
+        'dest': 'email_recipients',
+        'help': "email addresses to send queried logs to; specicy emails separately or comma-separated",
+        'default': [],
+        'action': scripting.args.AppendOrSplitAndExtendAction
+    },
+    {
+        'long': "--email-sender",
+        'dest': "email_sender",
+        'help': "from email address for queried log email"
+    },
+    {
+        'long': "--email-subject",
+        'dest': "email_subject",
+        'help': "subject of email"
+    },
+    {
+        'long': "--smtp-server",
+        'dest': "smtp_server",
+        'help': "SMTP server host and port (ex. 'smtp.google.com:587')"
+    },
+    {
+        'long': "--smtp-username",
+        'dest': "smtp_username",
+        'help': "Username to log into SMTP server"
+    },
+    {
+        'long': "--smtp-password",
+        'dest': "smtp_password",
+        'help': "Password to log into SMTP server"
+    },
+    {
+        'long': "--smtp-starttls",
+        'dest': "smtp_starttls",
+        'help': "Use STARTTLS",
+        'action': 'store_true',
+        'default': False
+    }
+    # TODO: add options for archive name
+]
+
+if __name__ == "__main__":
+    parser, args = scripting.args.parse_args(REQUIRED_ARGS, OPTIONAL_ARGS)
+    # TODO: add validation (e.g. either -d or -e must be specified, or both)
+
+    args_dict = args.__dict__
+    auth_token = args_dict.pop('auth_token')
+    num_days = args_dict.pop('num_days')
+
+    archiver = HipChatArchiver(auth_token, num_days, **args_dict)
+    archiver.archive(room_id=args.room_id)
+
