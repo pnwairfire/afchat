@@ -15,7 +15,7 @@ To create a token, set up a bot in slack.
 
 __author__      = "Joel Dubowy"
 
-import afscripting as scripting
+from afscripting import args as scripting_args
 
 from afchat.slack import SlackArchiver
 
@@ -60,7 +60,7 @@ OPTIONAL_ARGS = [
         'dest': 'email_recipients',
         'help': "email addresses to send queried logs to; specicy emails separately or comma-separated",
         'default': [],
-        'action': scripting.args.AppendOrSplitAndExtendAction
+        'action': scripting_args.AppendOrSplitAndExtendAction
     },
     {
         'long': "--email-sender",
@@ -98,7 +98,7 @@ OPTIONAL_ARGS = [
 ]
 
 if __name__ == "__main__":
-    parser, args = scripting.args.parse_args(REQUIRED_ARGS, OPTIONAL_ARGS)
+    parser, args = scripting_args.parse_args(REQUIRED_ARGS, OPTIONAL_ARGS)
     if not args.dest_dir and not args.email_recipients:
         raise ArgumentError(
             'Specify either destination dir or email recipients, or both')
