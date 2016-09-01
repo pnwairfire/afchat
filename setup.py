@@ -26,6 +26,7 @@ setup(
     description='Utilities for interacting with chat services',
     install_requires=[
         "afscripting==1.0.0",
+        "requests==2.11.1"
     ],
     dependency_links=[
         "https://pypi.smoke.airfire.org/simple/afscripting/",
