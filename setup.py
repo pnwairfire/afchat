@@ -29,6 +29,6 @@ setup(
         "requests==2.11.1"
     ],
     dependency_links=[
-        "https://pypi.smoke.airfire.org/simple/afscripting/",
+        "https://pypi.airfire.org/simple/afscripting/",
     ]
 )
